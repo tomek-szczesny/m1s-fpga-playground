@@ -1,0 +1,3 @@
+[submodule "gateware/ice40_lib"]
+	path = gateware/ice40_lib
+	url = git@github.com:tomek-szczesny/ice40_lib.git
