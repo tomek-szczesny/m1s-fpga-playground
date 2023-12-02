@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "hx8k")(type "KiCad")(uri "${KIPRJMOD}/libs/ICE40HX8K-CT256.kicad_sym")(options "")(descr ""))
+)

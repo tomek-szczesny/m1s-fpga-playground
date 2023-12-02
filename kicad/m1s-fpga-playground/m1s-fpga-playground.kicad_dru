@@ -1,0 +1,5 @@
+(version 1)
+
+(rule sdram_isolation
+   (constraint clearance (min 1mm))
+   (condition "A.NetClass == 'SDRAM' && B.Type == 'Zone'"))
