@@ -26,7 +26,7 @@ wire clk14;
 clkdiv #(7142857) m_clk4 (EXTOSC, clk14);
 
 // Create a Johnson counter with bit width of 7, and wire its output
-// diectly to LEDs. Use 4Hz clock as input, and use "63" button as reset.
+// diectly to LEDs. Use 14Hz clock as input, and use "63" button as reset.
 // Keep in mind released button has value "1", so it has to be inverted.
 johnson #(7) m_cntr (
 	.clk(clk14),
