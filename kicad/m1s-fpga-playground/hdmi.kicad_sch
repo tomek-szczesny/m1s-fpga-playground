@@ -1187,7 +1187,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -1224,7 +1224,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -1261,7 +1261,7 @@
           (reference "R45") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R145") (unit 1)
         )
@@ -1289,7 +1289,7 @@
     )
     (pin "1" (uuid 3c720f2d-ec0d-450e-b3d0-a0940cf61463))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0143") (unit 1)
         )
@@ -1326,7 +1326,7 @@
           (reference "R34") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R134") (unit 1)
         )
@@ -1363,7 +1363,7 @@
           (reference "R40") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R140") (unit 1)
         )
@@ -1400,7 +1400,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -1450,7 +1450,7 @@
     (pin "9" (uuid c4af2328-640a-45fe-a713-68bb7d7cbf46))
     (pin "SH" (uuid d92c72db-e925-42f7-8948-a4a080cf04bc))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "J101") (unit 1)
         )
@@ -1487,7 +1487,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -1520,7 +1520,7 @@
           (reference "#PWR046") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0153") (unit 1)
         )
@@ -1553,7 +1553,7 @@
           (reference "#PWR046") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0153") (unit 1)
         )
@@ -1590,7 +1590,7 @@
           (reference "C9") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "C108") (unit 1)
         )
@@ -1627,7 +1627,7 @@
           (reference "R39") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R139") (unit 1)
         )
@@ -1664,7 +1664,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -1692,7 +1692,7 @@
     )
     (pin "1" (uuid 675df1d4-24e5-4c16-940c-4b0ddd6033de))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0140") (unit 1)
         )
@@ -1729,7 +1729,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -1762,7 +1762,7 @@
     (pin "2" (uuid e8fa88cc-8973-42af-a2fd-1d26d3294ff3))
     (pin "3" (uuid 76106120-fcc0-4ee0-b370-46e7ac4663c5))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf/1af20bc0-ff48-4563-94fd-abef46cfec37"
           (reference "Q501") (unit 1)
         )
@@ -1792,7 +1792,7 @@
     (pin "2" (uuid 6491ee9f-76c1-447e-8ac1-116fd70a269a))
     (pin "3" (uuid 5e50dc81-cbc7-490f-98c4-28db38786bbb))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf/1af20bc0-ff48-4563-94fd-abef46cfec37"
           (reference "Q502") (unit 1)
         )
@@ -1817,7 +1817,7 @@
     )
     (pin "1" (uuid 5f59c3ad-240b-4193-b155-ede5e1852a3c))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0145") (unit 1)
         )
@@ -1850,7 +1850,7 @@
           (reference "#PWR046") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0153") (unit 1)
         )
@@ -1887,7 +1887,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -1924,7 +1924,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -1957,7 +1957,7 @@
     (pin "2" (uuid 48ad037f-6cfc-4163-ae8b-3fc9157c50ca))
     (pin "3" (uuid 3637d591-7c76-4017-a76b-1dac3700845b))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf/1af20bc0-ff48-4563-94fd-abef46cfec37"
           (reference "Q503") (unit 1)
         )
@@ -1982,7 +1982,7 @@
     )
     (pin "1" (uuid b5fe6c84-70b2-4d8b-a5e1-f3de773bd53e))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0139") (unit 1)
         )
@@ -2010,7 +2010,7 @@
     )
     (pin "1" (uuid a9e7817e-e8ed-4461-950e-dd4b4003ad23))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0145") (unit 1)
         )
@@ -2047,7 +2047,7 @@
           (reference "R33") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R133") (unit 1)
         )
@@ -2084,7 +2084,7 @@
           (reference "R43") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R143") (unit 1)
         )
@@ -2112,7 +2112,7 @@
     )
     (pin "1" (uuid fcb6c9bf-e30d-4093-b6c5-2e144f99afda))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0145") (unit 1)
         )
@@ -2149,7 +2149,7 @@
           (reference "R44") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R144") (unit 1)
         )
@@ -2177,7 +2177,7 @@
     )
     (pin "1" (uuid 26970c45-0be7-4676-a1be-7b37baa7fb4c))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0140") (unit 1)
         )
@@ -2214,7 +2214,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -2242,7 +2242,7 @@
     )
     (pin "1" (uuid 4b416b47-51fa-48e0-ba26-5b852f5a86ad))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0137") (unit 1)
         )
@@ -2279,7 +2279,7 @@
           (reference "R41") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R141") (unit 1)
         )
@@ -2307,7 +2307,7 @@
     )
     (pin "1" (uuid d53c2279-c38a-466b-a910-e721a75fe6c0))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0145") (unit 1)
         )
@@ -2335,7 +2335,7 @@
     )
     (pin "1" (uuid ad1ad9ed-3a1c-4ddd-905b-07698fe99418))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0145") (unit 1)
         )
@@ -2372,7 +2372,7 @@
           (reference "R46") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R146") (unit 1)
         )
@@ -2409,7 +2409,7 @@
           (reference "R35") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R135") (unit 1)
         )
@@ -2446,7 +2446,7 @@
           (reference "R42") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R142") (unit 1)
         )
@@ -2474,7 +2474,7 @@
     )
     (pin "1" (uuid 5cd7a9a2-c967-42a2-b683-617d52a4e0f6))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0140") (unit 1)
         )
@@ -2511,7 +2511,7 @@
           (reference "R32") (unit 1)
         )
       )
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "R132") (unit 1)
         )
@@ -2539,7 +2539,7 @@
     )
     (pin "1" (uuid 8311a618-0a46-4f1e-aef8-7c272a928036))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0144") (unit 1)
         )
@@ -2567,7 +2567,7 @@
     )
     (pin "1" (uuid 934fc144-86b0-4366-b2ad-77d4dbb64524))
     (instances
-      (project "m1s-fpga-addon"
+      (project "m1s-fpga-playground"
         (path "/909b030b-fa1a-4fe8-b1ee-422b4d9e23cf"
           (reference "#PWR0138") (unit 1)
         )
