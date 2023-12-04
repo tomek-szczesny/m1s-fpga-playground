@@ -21,9 +21,15 @@ module top(
 );
 
 // Dividing 100MHz oscillator clock into ~14Hz, using a clock divider 
-// from the library. Its numerical parameter is a divisor.
-wire clk14;
-clkdiv #(7142857) m_clk4 (EXTOSC, clk14);
+// from the library. 7142857 is a divisor we're after.
+// If meeting clock speed constraints is troublesome, consider chaining two
+// dividers, with the smaller one being first. Bigger logical networks support
+// lower clock frequencies.
+// Divisors can be obtained through prime factorization.
+
+wire clk1, clk14;
+clkdiv #(23)     m_clk1 (EXTOSC, clk1);
+clkdiv #(310559) m_clk2 (clk1,   clk14);
 
 // Create a Johnson counter with bit width of 7, and wire its output
 // diectly to LEDs. Use 14Hz clock as input, and use "63" button as reset.

@@ -2,10 +2,10 @@
 PROJ=blinky
 BUILD_DIR=./build
 DEVICE=hx4k
-FREQ=100
+FREQ=1
 FOOTPRINT=tq144
 PIN_DEF=../ice40_lib/playground.pcf
-FILES = blinky.v
+FILES = $(PROJ).v
 # EEPROM size on the dev board, in kB
 EEPROM_SIZE=2048
 # Remote SBC hostname or IP
@@ -38,7 +38,7 @@ build:
 	mkdir -p $(BUILD_DIR)
 	yosys -p "synth_ice40 -top top -json $(BUILD_DIR)/$(PROJ).json" $(FILES)
 	nextpnr-ice40 --$(DEVICE) --freq $(FREQ) --package $(FOOTPRINT) --json $(BUILD_DIR)/$(PROJ).json \
-		      --pcf $(PIN_DEF) --asc $(BUILD_DIR)/$(PROJ).asc
+		      --pcf $(PIN_DEF) --asc $(BUILD_DIR)/$(PROJ).asc --pre-pack $(PROJ).py
 	icepack $(BUILD_DIR)/$(PROJ).asc $(BUILD_DIR)/$(PROJ).bin
 
 burn:
