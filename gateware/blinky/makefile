@@ -15,8 +15,8 @@ SETUP_LOGIN=mctom
 # Flashrom -p argument
 SPI_DEV=/dev/spidev0.0
 # Reset Pin: GPIO3B.4 (#108)
-RESET_CHIP_DEV=/devices/platform/fe760000.gpio/gpio/gpiochipTODO
-RESET_LINE=TODO(number)
+RESET_CHIP_DEV=/devices/platform/pinctrl/fe760000.gpio3/gpio/gpiochip96
+RESET_LINE=108
 # # # # #
 # SSH invocation for normal operation (using key and special user account)
 SSH=ssh -i ~/.ssh/ice40_prog ice40_prog@$(REMOTE_HOST)
@@ -51,7 +51,7 @@ burn:
 	$(SSH) "echo out > $(PIN_FS)/direction"
 	$(SSH) "echo 0 > $(PIN_FS)/value"
 	@echo ">>> Flashing devboard EEPROM..."
-	$(SSH) "flashrom -p $(PROGRAMMER) -w ~/flash.img"
+	-$(SSH) "flashrom -p $(PROGRAMMER) -w ~/flash.img"
 	@echo ">>> Releasing reset on FPGA devboard..."
 	$(SSH) "echo in > $(PIN_FS)/direction"
 	@echo ">>> Removing remote temporary file..."
