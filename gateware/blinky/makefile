@@ -32,6 +32,7 @@ none:
 	@echo ""
 	@echo "make build 		- Builds project"
 	@echo "make burn		- Uploads project to a iCE40HX8K-EVB connected to the remote SBC"
+	@echo "make reset		- Resets FPGA
 	@echo "sudo make setup		- Sets up the local machine and the remote SBC for FPGA programming"
 
 build:
@@ -56,6 +57,14 @@ burn:
 	$(SSH) "echo in > $(PIN_FS)/direction"
 	@echo ">>> Removing remote temporary file..."
 	$(SSH) "rm ~/flash.img"
+	@echo ">>> All done!"
+
+reset:
+	@echo ">>> Asserting reset on FPGA devboard..."
+	$(SSH) "echo out > $(PIN_FS)/direction"
+	$(SSH) "echo 0 > $(PIN_FS)/value"
+	@echo ">>> Releasing reset on FPGA devboard..."
+	$(SSH) "echo in > $(PIN_FS)/direction"
 	@echo ">>> All done!"
 
 
