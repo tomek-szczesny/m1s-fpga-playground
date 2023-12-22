@@ -39,8 +39,7 @@ module top(
 	output wire VS
 );
 
-// Generating VGA clock, close to 25.175MHz, hoping the display has some
-// tolerance for clock deviations.
+// Generating VGA clock at 65MHz
 // The PLL module is defined at the end of this file because it's
 // generated exclusively for this purpose.
 wire clkvga;
@@ -82,6 +81,7 @@ video_test #(
 // Short visual data FIFO, between visual data generator and transmitter.
 // we hope to generate visual data at least as fast as it's sent, so for now
 // we don't need a full frame buffer.
+// Technically it is not strictly necessary..
 // FIFO size is 16 bits wide and 1024 bits long.
 // FIFO status will be displayed on 4 LEDs as well.
 wire [15:0] fifo_in;
@@ -104,8 +104,9 @@ assign {LED81, LED82, LED83, LED84} = fifo_status;
 
 // VGA_TX driver, that dumps correct pattern through GPIO pins
 // This module assumes that data is always ready in FIFO.
-// For now we will only adjust for bitness of Playground's RGB DACs
-// And leave all the other params default.
+// The parameters are VGA horizontal and vertical timings, 
+// measured in pixel clock cycles.
+// Taken from: http://tinyvga.com/vga-timing
 vga_tx #(
 	.hva(1024),
 	.hfp(24),
