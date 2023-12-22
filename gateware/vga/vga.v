@@ -1,8 +1,10 @@
 //
-// Blinking LEDs demo
+// VGA output demo
 // by Tomek Szczesny 2023
 //
-// A Johnson counter on 7 LEDs
+// Capable of displaying four different test patterns,
+// to be selected with BUT63. 
+// Configured for 1024x768 60Hz using VESA timings.
 //
 `include "../ice40_lib/fifo.v"
 `include "../ice40_lib/vga_tx.v"
