@@ -63,6 +63,8 @@ wire [4:0] r;
 wire [5:0] g;
 wire [4:0] b;
 video_test #(
+	.v(768),
+	.h(1024),
 	.r(5),
 	.g(6),
 	.b(5))
@@ -105,6 +107,14 @@ assign {LED81, LED82, LED83, LED84} = fifo_status;
 // For now we will only adjust for bitness of Playground's RGB DACs
 // And leave all the other params default.
 vga_tx #(
+	.hva(1024),
+	.hfp(24),
+	.hsp(136),
+	.hbp(160),
+	.vva(768),
+	.vfp(3),
+	.vsp(6),
+	.vbp(29),
 	.rd(5),
 	.gd(6),
 	.bd(5))
@@ -131,8 +141,8 @@ endmodule
  * Use at your own risk.
  *
  * Given input frequency:       100.000 MHz
- * Requested output frequency:   25.175 MHz
- * Achieved output frequency:    25.312 MHz
+ * Requested output frequency:   65.000 MHz
+ * Achieved output frequency:    65.000 MHz
  */
 
 module pll(
@@ -143,10 +153,10 @@ module pll(
 
 SB_PLL40_PAD #(
 		.FEEDBACK_PATH("SIMPLE"),
-		.DIVR(4'b1001),		// DIVR =  9
-		.DIVF(7'b1010000),	// DIVF = 80
-		.DIVQ(3'b101),		// DIVQ =  5
-		.FILTER_RANGE(3'b001)	// FILTER_RANGE = 1
+		.DIVR(4'b0100),		// DIVR =  4
+		.DIVF(7'b0110011),	// DIVF = 51
+		.DIVQ(3'b100),		// DIVQ =  4
+		.FILTER_RANGE(3'b010)	// FILTER_RANGE = 2
 	) uut (
 		.LOCK(locked),
 		.RESETB(1'b1),
