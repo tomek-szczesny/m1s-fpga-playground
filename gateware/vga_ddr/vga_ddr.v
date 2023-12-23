@@ -5,7 +5,7 @@
 //
 // Capable of displaying four different test patterns,
 // to be selected with BUT63. 
-// Configured for 1024x768 60Hz using VESA timings.
+// Configured 1080p@60Hz using VESA timings.
 //
 // Uses both PLLs in order to generate precise frequency.
 // 100MHz -> 55MHz -> 74.25MHz
@@ -14,6 +14,7 @@
 `include "../ice40_lib/vga_tx.v"
 `include "../ice40_lib/video_test.v"
 `include "../ice40_lib/ddr_io.v"
+`include "../ice40_lib/debounce.v"
 
 module top(
 	input wire EXTOSC,
@@ -46,8 +47,9 @@ module top(
 	output wire VS
 );
 
-// Generating VGA clock at 65MHz
-// The PLL module is defined at the end of this file because it's
+// Generating VGA clock in two stages.
+// One stage is not sufficient to generate clock with required 0.5% precision.
+// The PLL modules are defined at the end of this file because they're
 // generated exclusively for this purpose.
 wire clkpll, clkvga;
 pll pll55M (
@@ -63,18 +65,24 @@ pll2 pll74M25 (
 
 
 // Use BUT63 to cycle through 4 possible test patterns
-// Show selected pattern on LEDs 79, 80.
+// Show selected pattern on LEDs.
+debounce #(2**20) b63_db (
+	.clk(clkpll),
+	.in(BUT63),
+	.out(BUT63_db)
+);
+wire BUT63_db;
 reg [1:0] test_p = 0;
-always@(negedge BUT63) test_p <= test_p + 1;
+always@(negedge BUT63_db) test_p <= test_p + 1;
 assign {LED80, LED81} = test_p;
 
 // Video test pattern generator
-wire [4:0] r;
-wire [5:0] g;
-wire [4:0] b;
-video_test #(
+wire [4:0] re, ro;
+wire [5:0] ge, go;
+wire [4:0] be, bo;
+video_test_ddr #(
 	.v(1080),
-	.h(960),
+	.h(1920),
 	.r(5),
 	.g(6),
 	.b(5))
@@ -83,9 +91,12 @@ video_test #(
 	.cke(~fifo_status[3]),
 	.pattern(test_p),
 	.rst(0),
-	.rd(r),
-	.gd(g),
-	.bd(b),
+	.rde(re),
+	.gde(ge),
+	.bde(be),
+	.rdo(ro),
+	.gdo(go),
+	.bdo(bo),
 	.clk_o(fifo_in_clk)
 );
 
@@ -93,13 +104,12 @@ video_test #(
 // we hope to generate visual data at least as fast as it's sent, so for now
 // we don't need a full frame buffer.
 // Technically it is not strictly necessary..
-// FIFO size is 16 bits wide and 1024 bits long.
-// FIFO status will be displayed on 4 LEDs as well.
-wire [15:0] fifo_in;
-assign fifo_in = {r, g, b};
+// FIFO size is 32 bits wide and 256 bits long.
+wire [31:0] fifo_in;
+assign fifo_in = {ro, go, bo, re, ge, be};
 wire [3:0] fifo_status;
 wire fifo_in_clk;
-fifo #(	.n(16),
+fifo #(	.n(32),
 	.m(256))
 	vga_fifo (
 	.clk(fifo_in_clk),
@@ -110,14 +120,14 @@ fifo #(	.n(16),
 );
 assign LED82 = fifo_status[3];
 
-wire [15:0] fifo_out;
+wire [31:0] fifo_out;
 wire fifo_out_clk;
 
 // VGA_TX driver, that dumps correct pattern through GPIO pins
 // This module assumes that data is always ready in FIFO.
 // The parameters are VGA horizontal and vertical timings, 
 // measured in pixel clock cycles.
-// Taken from: http://tinyvga.com/vga-timing
+// Taken from VESA Display Monitor Timing Standard V1.0 rev. 12
 vga_tx_ddr #(
 	.hva(1920),
 	.hfp(22),
@@ -134,7 +144,7 @@ vga_tx_ddr #(
 	.bd(5))
 	the_vga_tx (
 	.clk(clkvga),
-	.data({fifo_out,fifo_out}),
+	.data(fifo_out),
 	.fetch(fifo_out_clk),
 	.R({vga_data[35:31], vga_data[17:13]}),
 	.G({vga_data[30:25], vga_data[12:7]}),
