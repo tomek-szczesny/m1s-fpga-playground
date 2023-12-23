@@ -1,10 +1,14 @@
 //
 // VGA output demo
+// with DDR output
 // by Tomek Szczesny 2023
 //
 // Capable of displaying four different test patterns,
 // to be selected with BUT63. 
 // Configured for 1024x768 60Hz using VESA timings.
+//
+// Uses both PLLs in order to generate precise frequency.
+// 100MHz -> 55MHz -> 74.25MHz
 //
 `include "../ice40_lib/fifo.v"
 `include "../ice40_lib/vga_tx.v"
@@ -45,11 +49,16 @@ module top(
 // Generating VGA clock at 65MHz
 // The PLL module is defined at the end of this file because it's
 // generated exclusively for this purpose.
-wire clkvga;
-pll pll25M175 (
+wire clkpll, clkvga;
+pll pll55M (
 	.clock_in(EXTOSC),
-	.clock_out(clkvga),
+	.clock_out(clkpll),
 	.locked(LED78)
+);
+pll2 pll74M25 (
+	.clock_in(clkpll),
+	.clock_out(clkvga),
+	.locked(LED79)
 );
 
 
@@ -57,15 +66,15 @@ pll pll25M175 (
 // Show selected pattern on LEDs 79, 80.
 reg [1:0] test_p = 0;
 always@(negedge BUT63) test_p <= test_p + 1;
-assign {LED79, LED80} = test_p;
+assign {LED80, LED81} = test_p;
 
 // Video test pattern generator
 wire [4:0] r;
 wire [5:0] g;
 wire [4:0] b;
 video_test #(
-	.v(768),
-	.h(512),
+	.v(1080),
+	.h(960),
 	.r(5),
 	.g(6),
 	.b(5))
@@ -99,7 +108,7 @@ fifo #(	.n(16),
 	.data_o(fifo_out),
 	.status(fifo_status)
 );
-assign {LED81, LED82} = {fifo_status[3], fifo_status[0]};
+assign LED82 = fifo_status[3];
 
 wire [15:0] fifo_out;
 wire fifo_out_clk;
@@ -110,16 +119,16 @@ wire fifo_out_clk;
 // measured in pixel clock cycles.
 // Taken from: http://tinyvga.com/vga-timing
 vga_tx_ddr #(
-	.hva(1024),
-	.hfp(24),
-	.hsp(136),
-	.hbp(160),
-	.vva(768),
-	.vfp(3),
-	.vsp(6),
-	.vbp(29),
-	.hpp(0),	// Pulse Polarity
-	.vpp(0),
+	.hva(1920),
+	.hfp(22),
+	.hsp(33),
+	.hbp(37),
+	.vva(1080),
+	.vfp(4),
+	.vsp(5),
+	.vbp(36),
+	.hpp(1),	// Pulse Polarity
+	.vpp(1),
 	.rd(5),
 	.gd(6),
 	.bd(5))
@@ -146,6 +155,7 @@ ddr_out #(18) vga_ddr_out(
 
 endmodule
 
+
 /**
  * PLL configuration
  *
@@ -154,8 +164,8 @@ endmodule
  * Use at your own risk.
  *
  * Given input frequency:       100.000 MHz
- * Requested output frequency:   73.125 MHz
- * Achieved output frequency:    73.214 MHz
+ * Requested output frequency:   55.000 MHz
+ * Achieved output frequency:    55.000 MHz
  */
 
 module pll(
@@ -166,17 +176,51 @@ module pll(
 
 SB_PLL40_PAD #(
 		.FEEDBACK_PATH("SIMPLE"),
-		.DIVR(4'b0100),		// DIVR =  6
-		.DIVF(7'b0110011),	// DIVF = 40
-		.DIVQ(3'b101),		// DIVQ =  3
-		.FILTER_RANGE(3'b010)	// FILTER_RANGE = 1
+		.DIVR(4'b0100),		// DIVR =  4
+		.DIVF(7'b0101011),	// DIVF = 43
+		.DIVQ(3'b100),		// DIVQ =  4
+		.FILTER_RANGE(3'b010)	// FILTER_RANGE = 2
 	) uut (
 		.LOCK(locked),
 		.RESETB(1'b1),
 		.BYPASS(1'b0),
 		.PACKAGEPIN(clock_in),
-		.PLLOUTGLOBAL(clock_out)
+		.PLLOUTCORE(clock_out)
 		);
 
 endmodule
 
+
+/**
+ * PLL configuration
+ *
+ * This Verilog module was generated automatically
+ * using the icepll tool from the IceStorm project.
+ * Use at your own risk.
+ *
+ * Given input frequency:        55.000 MHz
+ * Requested output frequency:   74.250 MHz
+ * Achieved output frequency:    74.250 MHz
+ */
+
+module pll2(
+	input  clock_in,
+	output clock_out,
+	output locked
+	);
+
+SB_PLL40_CORE #(
+		.FEEDBACK_PATH("SIMPLE"),
+		.DIVR(4'b0100),		// DIVR =  4
+		.DIVF(7'b0110101),	// DIVF = 53
+		.DIVQ(3'b011),		// DIVQ =  3
+		.FILTER_RANGE(3'b001)	// FILTER_RANGE = 1
+	) uut (
+		.LOCK(locked),
+		.RESETB(1'b1),
+		.BYPASS(1'b0),
+		.REFERENCECLK(clock_in),
+		.PLLOUTGLOBAL(clock_out)
+		);
+
+endmodule
