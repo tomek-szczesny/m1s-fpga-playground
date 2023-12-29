@@ -15,10 +15,12 @@
 `include "../ice40_lib/video_test.v"
 `include "../ice40_lib/ddr_io.v"
 `include "../ice40_lib/debounce.v"
+`include "../ice40_lib/rgb_to_gray.v"
 
 module top(
 	input wire EXTOSC,
 	input wire BUT63,
+	input wire BUT64,
 	
 	output wire LED78,
 	output wire LED79,
@@ -100,13 +102,39 @@ video_test_ddr #(
 	.clk_o(fifo_in_clk)
 );
 
+// BUT64 functionality - convert to grayscale on the fly
+wire [5:0] bwo, bwe;
+rgb_to_gray#(
+	.n(6),
+	.m(6),
+	.fidelity(3))
+	r2go (
+	.r({ro, 1'b0}),
+	.g(go),
+	.b({bo, 1'b0}),
+	.y(bwo)
+);
+rgb_to_gray#(
+	.n(6),
+	.m(6),
+	.fidelity(3))
+	r2ge (
+	.r({re, 1'b0}),
+	.g(ge),
+	.b({be, 1'b0}),
+	.y(bwe)
+);
+always @ (BUT64, ro,go,bo,re,ge,be,bwo,bwe) begin
+	if (BUT64) fifo_in = {ro, go, bo, re, ge, be};
+	else fifo_in = {bwo[5:1], bwo, bwo[5:1], bwe[5:1], bwe, bwe[5:1]} ;
+end
+
 // Short visual data FIFO, between visual data generator and transmitter.
 // we hope to generate visual data at least as fast as it's sent, so for now
 // we don't need a full frame buffer.
 // Technically it is not strictly necessary..
 // FIFO size is 32 bits wide and 256 bits long.
 wire [31:0] fifo_in;
-assign fifo_in = {ro, go, bo, re, ge, be};
 wire [3:0] fifo_status;
 wire fifo_in_clk;
 fifo #(	.n(32),
