@@ -16,6 +16,7 @@
 `include "../ice40_lib/ddr_io.v"
 `include "../ice40_lib/debounce.v"
 `include "../ice40_lib/rgb_to_gray.v"
+`include "../ice40_lib/dither.v"
 
 module top(
 	input wire EXTOSC,
@@ -102,11 +103,22 @@ video_test_ddr #(
 	.clk_o(fifo_in_clk)
 );
 
-// BUT64 functionality - convert to grayscale on the fly
-wire [5:0] bwo, bwe;
-rgb_to_gray#(
+// Hacky x-y coordinate counters for dither
+reg [10:0] x_ctr = 0;
+reg [10:0] y_ctr = 0;
+
+always @ (posedge fifo_in_clk)
+begin
+	x_ctr <= (x_ctr==1918 ? 0 : x_ctr + 2);
+	y_ctr <= (x_ctr==1918 ? (y_ctr==1079 ? 0 : y_ctr + 1) : y_ctr);
+end
+
+
+// BUT64 functionality - convert to mono on the fly
+wire [7:0] bwo, bwe;
+rgb_g_ntsc#(
 	.n(6),
-	.m(6),
+	.m(8),
 	.fidelity(3))
 	r2go (
 	.r({ro, 1'b0}),
@@ -114,9 +126,9 @@ rgb_to_gray#(
 	.b({bo, 1'b0}),
 	.y(bwo)
 );
-rgb_to_gray#(
+rgb_g_ntsc#(
 	.n(6),
-	.m(6),
+	.m(8),
 	.fidelity(3))
 	r2ge (
 	.r({re, 1'b0}),
@@ -124,9 +136,31 @@ rgb_to_gray#(
 	.b({be, 1'b0}),
 	.y(bwe)
 );
-always @ (BUT64, ro,go,bo,re,ge,be,bwo,bwe) begin
+
+wire mno, mne;
+
+ordered_mono #(
+	.n(8),
+	.m(4))
+	dithero (
+	.in(bwo),
+	.x(x_ctr[3:0]+1),
+	.y(y_ctr[3:0]),
+	.out(mno)
+);
+ordered_mono #(
+	.n(8),
+	.m(4))
+	dithere (
+	.in(bwe),
+	.x(x_ctr[3:0]),
+	.y(y_ctr[3:0]),
+	.out(mne)
+);
+
+always @ (BUT64, ro,go,bo,re,ge,be,mno,mne) begin
 	if (BUT64) fifo_in = {ro, go, bo, re, ge, be};
-	else fifo_in = {bwo[5:1], bwo, bwo[5:1], bwe[5:1], bwe, bwe[5:1]} ;
+	else fifo_in = {{16{mno}}, {16{mne}}} ;
 end
 
 // Short visual data FIFO, between visual data generator and transmitter.
