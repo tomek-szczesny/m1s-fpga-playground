@@ -139,19 +139,19 @@ rgb_g_ntsc#(
 
 wire mno, mne;
 
-blue16_mono #()
+blue_mono #(64)
 	dithero (
 	.in(bwo),
-	.x(x_ctr[3:0]+1),
-	.y(y_ctr[3:0]),
+	.x(x_ctr[5:0]+1),
+	.y(y_ctr[5:0]),
 	.clk(fifo_in_clk),
 	.out(mno)
 );
-blue16_mono #()
+blue_mono #(64)
 	dithere (
 	.in(bwe),
-	.x(x_ctr[3:0]),
-	.y(y_ctr[3:0]),
+	.x(x_ctr[5:0]),
+	.y(y_ctr[5:0]),
 	.clk(fifo_in_clk),
 	.out(mne)
 );
